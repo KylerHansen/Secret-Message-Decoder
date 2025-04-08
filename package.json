@@ -1,0 +1,21 @@
+{
+  "name": "secret-message-decoder",
+  "version": "1.0.0",
+  "description": "Scans a google doc containing a table with coordinates and characters to decode a message. Here is an example of a document that would output the letter 'F'. https://docs.google.com/document/d/e/2PACX-1vRMx5YQlZNa3ra8dYYxmv-QIQ3YJe8tbI3kqcuC7lQiZm-CSEznKfN_HYNSpoXcZIV3Y_O3YoUB1ecq/pub",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha",
+    "decode": "node index.js"
+  },
+  "author": "Kyler Hansen",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^26.0.0",
+    "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.1.0"
+  }
+}
