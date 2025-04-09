@@ -1,4 +1,5 @@
 import { JSDOM } from "jsdom";
+
 export async function decodeMessage(documentUrl) {
   if (!documentUrl) {
     return undefined;
@@ -12,31 +13,26 @@ export async function decodeMessage(documentUrl) {
 
   const jsdom = new JSDOM(text);
 
-  const document = jsdom.window.document.querySelector("tbody").textContent;
-
-  console.log("document", document);
-
-  const data = document
-    .replace("x-coordinateCharactery-coordinate", "")
-    .split("");
+  const rows = Array.from(jsdom.window.document.querySelectorAll("tr")).slice(
+    1
+  );
 
   let cells = [];
 
-  for (let i = 0; i < data.length; i += 3) {
-    const xCoordinate = parseInt(data[i]);
-    const yCoordinate = parseInt(data[i + 2]);
-    const character = data[i + 1];
+  rows.map((row) => {
+    const rowValues = Array.from(row.querySelectorAll("td"));
+    const xCoordinate = getDataValue(rowValues[0]);
+    const yCoordinate = getDataValue(rowValues[2]);
+    const character = rowValues[1].textContent;
 
-    if (!isNaN(yCoordinate) && !isNaN(xCoordinate) && character) {
-      cells.push({ yCoordinate, xCoordinate, character });
-    }
-  }
+    cells.push({ yCoordinate, xCoordinate, character });
+  });
 
   const maxX = Math.max(...cells.map((cell) => cell.xCoordinate));
   const maxY = Math.max(...cells.map((cell) => cell.yCoordinate));
 
-  let message = Array.from({ length: maxY + 1 }, () =>
-    Array(maxX + 1).fill("")
+  const message = Array.from({ length: maxY + 1 }, () =>
+    Array(maxX + 1).fill(" ")
   );
 
   cells.forEach((cell) => {
@@ -50,5 +46,14 @@ export async function decodeMessage(documentUrl) {
 
   console.info(output);
 
-  return output;
+  return output.trim();
+}
+
+function getDataValue(tableData) {
+  const result = parseInt(tableData.textContent);
+
+  if (result == undefined || isNaN(result))
+    throw new Error("Could not parse table cell value");
+
+  return result;
 }
