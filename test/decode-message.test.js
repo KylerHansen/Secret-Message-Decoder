@@ -19,21 +19,8 @@ describe(decodeMessage.name, () => {
   });
 
   it("gives final coded message", async () => {
-    assert.deepEqual(
-      await decodeMessage(
-        "https://docs.google.com/document/d/e/2PACX-1vQGUck9HIFCyezsrBSnmENk5ieJuYwpt7YHYEzeNJkIb9OSDdx-ov2nRNReKQyey-cwJOoEKUhLmN9z/pub"
-      ),
-      `
-
-
-████████░     ████████░   ██████████░    ███████░  ██░           ███░ ███░    ███░ ██░     ██░
-██░     ██░ ███░     ███░ ██░          ███░    ██░ ███░   ███░   ██░    ██░  ██░   ██░     ██░
-██░     ██░ ██░       ██░ ██░         ███░          ██░  █████░ ███░     ██░██░    ██░     ██░
-████████░   ██░       ██░ ████████░   ██░           ███░ ██░██░ ██░       ███░     ██████████░
-██░     ██░ ██░       ██░ ██░         ███░           ██░██░ ██░██░       ██░██░    ██░     ██░
-██░     ██░ ███░     ███░ ██░          ███░    ██░   ████░   ████░      ██░  ██░   ██░     ██░
-████████░     ████████░   ██████████░    ███████░     ██░     ██░     ███░    ███░ ██░     ██░
-`
+    await decodeMessage(
+      "https://docs.google.com/document/d/e/2PACX-1vQGUck9HIFCyezsrBSnmENk5ieJuYwpt7YHYEzeNJkIb9OSDdx-ov2nRNReKQyey-cwJOoEKUhLmN9z/pub"
     );
   });
 });

@@ -41,7 +41,7 @@ export async function decodeMessage(documentUrl) {
 
   const output = message
     .reverse()
-    .map((e) => e.join(""))
+    .map((item) => item.join(""))
     .join("\n");
 
   console.info(output);
